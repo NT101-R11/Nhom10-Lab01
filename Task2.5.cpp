@@ -27,6 +27,7 @@ string normalize(const string& s) {
     return result;
 }
 
+// (stovi = string to vector<int>) :D
 vector<int> stovi(const string& k) {
     vector<int> result;
     result.reserve(k.length());
