@@ -16,7 +16,6 @@ void clrscr() {
 #endif
 }
 
-// Normalizes the string by keeping ONLY alphabetic characters and converting them to lowercase
 string normalize(const string& s) {
     string result;
     result.reserve(s.length());
@@ -28,7 +27,6 @@ string normalize(const string& s) {
     return result;
 }
 
-// Converts normalized string to vector of int (0-25)
 vector<int> stovi(const string& k) {
     vector<int> result;
     result.reserve(k.length());
@@ -50,7 +48,7 @@ void printVector(const vector<int>& v) {
 string shift(const string& original, const vector<int>& key, bool is_encrypt = true) {
     string result;
     result.reserve(original.length());
-    int key_idx = 0; // Tracks key position independently of string index
+    int key_idx = 0;
 
     for (char c : original) {
         if (isalpha(static_cast<unsigned char>(c))) {
@@ -62,13 +60,11 @@ string shift(const string& original, const vector<int>& key, bool is_encrypt = t
             bool is_upper = isupper(static_cast<unsigned char>(c));
             char base = is_upper ? 'A' : 'a';
 
-            // Robust modulo arithmetic that correctly handles negative numbers in C++
             int shifted = ((c - base + k) % 26 + 26) % 26;
             result.push_back(static_cast<char>(base + shifted));
 
-            key_idx++; // Only advance key index for alphabetic characters
+            key_idx++;
         } else {
-            // Preserve spaces, punctuation, and numbers exactly as they are
             result.push_back(c);
         }
     }
@@ -85,7 +81,6 @@ int main() {
              << "[0] Exit\n"
              << "Choose your option: ";
 
-        // Handle invalid non-integer inputs gracefully
         if (!(cin >> option)) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -97,7 +92,6 @@ int main() {
         return 0;
     }
 
-    // Clear the newline character left in the buffer by `cin >> option`
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     try {
